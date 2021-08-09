@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block content %}
+<h3 class="text-center mx-auto" style="width: 800px;">User: {{ fname }}</h3>
+<h3 class="text-center mx-auto" style="width: 800px;">Week of {{ start }}</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 flex-lg-nowrap flex-sm-wrap d-flex justify-content-center">
+            {% for i in range(recipes|length) %}
+
+            <div class="card m-2" style="width: 18rem;" id={{ recipes[i][ 'recipe_id'] }}>
+                <div class="card-header">
+                    Day {{ i+1 }}
+                </div>
+                <a href={{ recipes[i][ "url"] }} target="_blank"><img class="card-img-top" src={{ recipes[i][ "image"] }}></a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ recipes[i]["title"] }}</h5>
+                    <p class="card-text">Prep time: {{ recipes[i]["prep_time"] }} min</p>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    <form class="updateorder" action="/updateorder" method="POST">
+        <input type="hidden" name="planid" value={{ plan_id }}>
+        <label for="order_status">Update Order Status:</label>
+
+        <select name="order_status" id="order_status">
+          <option value="created">Created</option>
+          <option value="processed">Processed</option>
+          <option value="dispatched">Dispatched</option>
+          <option value="delivered">Delivered</option>
+        </select>
+        <input type="submit" value="Update">
+    </form>
+    </div>
+{% endblock %}

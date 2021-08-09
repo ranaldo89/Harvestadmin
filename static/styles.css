@@ -1,0 +1,39 @@
+.card {
+    display: inline-block;
+}
+
+.bullet {
+    display: inline-block;
+    padding-left: 5px;
+    font-size: 14px;
+    padding-right: 15px;
+    margin-bottom: 20px;
+}
+
+.card {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px 0px;
+    width: 100%;
+    height: 40%;
+    margin-top: 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease 0s;
+    border-style: solid;
+
+}
+
+#p2-card {
+    width: 400px;
+    height: 440px;
+}
+
+.div-container {
+    height: 70vh;
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-radius: 5px;
+    padding: 1rem;
+    overflow: auto;
+    background: rgba(255, 255, 255, 0.9);
+    gap: 10px;
+}

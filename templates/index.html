@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+{% if session['logged_in'] %}
+   
+
+
+	<a href="/logout">Logout</a> <br> <br>
+    <div class="div-container">
+
+	{% for newplan in plans %}
+        <div class="card" id="p2-card">
+            <a class="p2" href="/plan-{{newplan.plan_id}}-{{newplan.user_id}}">
+                <h5 class="card-title">Plan ID# {{newplan.plan_id}}</h5>
+                <div class="bullet" id="bullet2"> User ID#
+                    {{newplan.user_id}}
+                </div>
+            </a>
+            </div>
+
+        </div>
+
+    {% endfor %}
+    {% endif %}
+{% endblock %}
+
+
