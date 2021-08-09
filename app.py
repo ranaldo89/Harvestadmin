@@ -1,8 +1,9 @@
 from flask import Flask, url_for, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import update
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:harvest1@localhost/harvest'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:00000@localhost/harvest'
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -101,6 +102,7 @@ class Plan(db.Model):
     plan_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), index=True)
     start = db.Column(db.Date, nullable=False)
+    order_status = db.Column(db.String(100), nullable=False)
 
     recipes = db.relationship("Recipe", secondary="assoc", backref="plans")
 
@@ -161,9 +163,16 @@ def update_orderstatus():
 
     plan = Plan.query.filter_by(plan_id=planid).first()
     if request.method == 'POST':
+        #stmt = update(Plan).where(Plan.plan_id==planid).
         plan.order_status = orderstatus
 
     db.session.commit()
+        
+      
+      # db.session.commit()
+
+    
+    
     #flash("Updated Successfully")
 
     return redirect("/")
@@ -196,4 +205,4 @@ if __name__ == '__main__':
     app.debug = True
     db.create_all()
     app.secret_key = "123"
-    app.run(debug=True, host="0.0.0.0", port=8000)
+    app.run(debug=True, host="0.0.0.0", port=5508)
